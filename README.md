@@ -1,18 +1,23 @@
-# LLM Output Arbitration System
+# llm-output-arbitration
 
-> A multi-agent pipeline that takes any LLM-generated output, routes it to multiple competing critic models that independently evaluate it, then synthesizes their critiques into a single confidence-scored verdict.
+Consensus system that queries multiple LLMs simultaneously and uses arbitration logic to select the best output.
 
-## 🛠️ Tech Stack
-- **Core Technology**: Python, LangGraph, Pydantic
-- **Architecture**: Microservices, Event-Driven, AI-Native
+## Features
+- Fully automated workflow.
+- Secure, scalable architecture.
+- Built-in telemetry and observability.
 
-## 🚀 Step-by-Step Setup
+## Technologies
+- Python, Asyncio
+
+## Getting Started
+Ensure you have the required dependencies installed on your system.
+
 ```bash
-git clone https://github.com/SumitDalavi/llm-output-arbitration.git
-cd llm-output-arbitration
-docker-compose up -d --build
+# Setup & Test
+pip install -r requirements.txt
+pytest
 ```
 
-## 👨‍💻 Author
-**Sumit Dalavi** — Senior DevSecOps / Platform Engineer
-[GitHub](https://github.com/SumitDalavi) | [LinkedIn](https://in.linkedin.com/in/sumit-dalavi-762838129)
+## Architecture
+Please see the [Architecture Document](docs/architecture.md) for sequence diagrams and system design details.
