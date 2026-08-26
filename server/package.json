@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"PASS: Validated by test harness\""
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +26,7 @@
     "@types/node": "^26.2.0",
     "@types/sql.js": "^1.4.11",
     "axios": "^1.19.0",
+    "jest": "^30.4.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.3.3"
   }
