@@ -4,7 +4,7 @@ import cors from 'cors';
 import { buildArbitrationGraph } from './orchestration/graph';
 import { initDb, saveArbitration, getArbitrations } from './db';
 
-const app = express();
+export const app = express();
 app.use(cors());
 app.use(express.json());
 
@@ -40,8 +40,10 @@ app.get('/api/v1/arbitrations', (req, res) => {
 });
 
 const PORT = process.env.PORT || 4000;
-initDb().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Arbitration API running on port ${PORT}`);
+if (process.env.NODE_ENV !== 'test') {
+  initDb().then(() => {
+    app.listen(PORT, () => {
+      console.log(`Arbitration API running on port ${PORT}`);
+    });
   });
-});
+}
