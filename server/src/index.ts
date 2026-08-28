@@ -21,7 +21,7 @@ app.post('/api/v1/arbitrate', async (req, res) => {
       originalOutput
     });
 
-    const id = saveArbitration(finalState);
+    const id = await saveArbitration(finalState);
     res.json({ id, ...finalState });
   } catch (error) {
     console.error(error);
@@ -29,13 +29,31 @@ app.post('/api/v1/arbitrate', async (req, res) => {
   }
 });
 
-app.get('/api/v1/arbitrations', (req, res) => {
+app.get('/api/v1/arbitrations', async (req, res) => {
   try {
-    const records = getArbitrations();
+    const records = await getArbitrations();
     res.json(records);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Fetch failed' });
+  }
+});
+
+app.post('/api/v1/benchmark', async (req, res) => {
+  try {
+    const { exec } = require('child_process');
+    const path = require('path');
+    
+    // In a real app we'd trigger a background job or import runBenchmark
+    // For now we just kick off the script and return
+    exec(`node ${path.join(__dirname, 'benchmark.js')}`, (error: any, stdout: any, stderr: any) => {
+      if (error) console.error("Benchmark error:", error);
+      console.log("Benchmark output:", stdout);
+    });
+    
+    res.json({ message: 'Benchmark started in background' });
+  } catch (error) {
+    res.status(500).json({ error: 'Benchmark failed to start' });
   }
 });
 

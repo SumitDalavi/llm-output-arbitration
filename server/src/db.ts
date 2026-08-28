@@ -1,15 +1,21 @@
-import initSqlJs from 'sql.js';
+import { Pool } from 'pg';
 
-let db: any = null;
+let db: Pool | null = null;
 
 export async function initDb() {
   if (db) return db;
-  const SQL = await initSqlJs();
-  db = new SQL.Database();
   
-  db.run(`
+  db = new Pool({
+    host: process.env.DB_HOST || 'localhost',
+    user: process.env.DB_USER || 'postgres',
+    password: process.env.DB_PASSWORD || 'postgres',
+    database: process.env.DB_NAME || 'arbitration',
+    port: parseInt(process.env.DB_PORT || '5432'),
+  });
+  
+  await db.query(`
     CREATE TABLE IF NOT EXISTS arbitrations (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      id SERIAL PRIMARY KEY,
       original_prompt TEXT,
       original_output TEXT,
       accuracy_critique TEXT,
@@ -17,23 +23,21 @@ export async function initDb() {
       completeness_critique TEXT,
       disagreements TEXT,
       final_verdict TEXT,
-      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
   `);
   
   return db;
 }
 
-export function saveArbitration(state: any): number {
+export async function saveArbitration(state: any): Promise<number> {
   if (!db) throw new Error("DB not initialized");
   
-  const stmt = db.prepare(`
+  const res = await db.query(`
     INSERT INTO arbitrations (
       original_prompt, original_output, accuracy_critique, logic_critique, completeness_critique, disagreements, final_verdict
-    ) VALUES (?, ?, ?, ?, ?, ?, ?)
-  `);
-  
-  stmt.run([
+    ) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id
+  `, [
     state.originalPrompt,
     state.originalOutput,
     JSON.stringify(state.accuracyCritique),
@@ -43,27 +47,26 @@ export function saveArbitration(state: any): number {
     JSON.stringify(state.finalVerdict)
   ]);
   
-  stmt.free();
-  
-  const res = db.exec("SELECT last_insert_rowid() as id");
-  return res[0].values[0][0];
+  return res.rows[0].id;
 }
 
-export function getArbitrations() {
+export async function getArbitrations() {
   if (!db) return [];
-  const res = db.exec("SELECT * FROM arbitrations ORDER BY created_at DESC");
-  if (res.length === 0) return [];
+  const res = await db.query("SELECT * FROM arbitrations ORDER BY created_at DESC");
   
-  const columns = res[0].columns;
-  return res[0].values.map((row: any) => {
+  return res.rows.map((row: any) => {
     const obj: any = {};
-    columns.forEach((col: string, i: number) => {
+    for (const key of Object.keys(row)) {
       try {
-        obj[col] = JSON.parse(row[i]);
+        if (typeof row[key] === 'string' && (row[key].startsWith('{') || row[key].startsWith('['))) {
+            obj[key] = JSON.parse(row[key]);
+        } else {
+            obj[key] = row[key];
+        }
       } catch {
-        obj[col] = row[i];
+        obj[key] = row[key];
       }
-    });
+    }
     return obj;
   });
 }

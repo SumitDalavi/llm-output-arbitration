@@ -75,6 +75,15 @@ export default function App() {
             >
               {loading ? <span className="animate-pulse">Arbitrating (may take 20s)...</span> : 'Run Arbitration Pipeline'}
             </button>
+            <button 
+              onClick={async () => {
+                alert('Started benchmark in the background!');
+                await axios.post('http://localhost:4000/api/v1/benchmark');
+              }}
+              className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-3 rounded-xl transition-colors flex items-center justify-center gap-2"
+            >
+              Run Benchmark (Cost/Latency/Calibration)
+            </button>
           </div>
         </div>
 

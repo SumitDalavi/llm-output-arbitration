@@ -2,6 +2,14 @@ import request from 'supertest';
 import { app } from '../src/index';
 import { initDb } from '../src/db';
 
+jest.mock("pg", () => {
+  const mPool = {
+    query: jest.fn().mockResolvedValue({ rows: [{ id: 1, original_prompt: "test", original_output: "test out", created_at: new Date() }] }),
+    end: jest.fn(),
+  };
+  return { Pool: jest.fn(() => mPool) };
+});
+
 jest.mock('@langchain/openai', () => {
     return {
         ChatOpenAI: jest.fn().mockImplementation(() => {

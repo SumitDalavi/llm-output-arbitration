@@ -5,6 +5,14 @@ import { detectDisagreements } from '../src/agents/disagreement';
 import { runAccuracyCritic, runLogicCritic, runCompletenessCritic } from '../src/agents/critics';
 import { buildArbitrationGraph } from '../src/orchestration/graph';
 
+jest.mock("pg", () => {
+  const mPool = {
+    query: jest.fn().mockResolvedValue({ rows: [{ id: 1, original_prompt: "test", original_output: "test out", created_at: new Date() }] }),
+    end: jest.fn(),
+  };
+  return { Pool: jest.fn(() => mPool) };
+});
+
 jest.mock('@langchain/openai', () => {
     return {
         ChatOpenAI: jest.fn().mockImplementation(() => {
@@ -54,17 +62,17 @@ describe('Server Tests', () => {
                 finalVerdict: { score: 4 }
             };
             
-            const id = saveArbitration(state);
+            const id = await saveArbitration(state);
             expect(id).toBeDefined();
 
-            const records = getArbitrations();
+            const records = await getArbitrations();
             expect(records.length).toBeGreaterThan(0);
             
             // test uninitialized
             jest.isolateModules(() => {
                 const dbModule = require('../src/db');
-                expect(dbModule.getArbitrations()).toEqual([]);
-                expect(() => dbModule.saveArbitration({})).toThrow("DB not initialized");
+                expect(dbModule.getArbitrations()).resolves.toEqual([]);
+                expect(dbModule.saveArbitration({})).rejects.toThrow("DB not initialized");
             });
         });
         

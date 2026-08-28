@@ -17,17 +17,8 @@ jobs:
         with:
           node-version: 20.x
       - name: Install Dependencies
-        run: npm install
-  python-build-test:
-    name: Python Build & Test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - name: Install Dependencies
-        run: pip install -r requirements.txt
+        run: cd server && npm install
+      - name: Build Server
+        run: cd server && npm run build
       - name: Run Tests
-        run: pytest
+        run: cd server && npm test
