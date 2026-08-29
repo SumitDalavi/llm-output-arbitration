@@ -1,6 +1,6 @@
 # llm-output-arbitration
 
-> **Maturity:** Partial Prototype
+> **Maturity:** Functional Prototype
 > _Consensus system that queries multiple LLMs simultaneously and uses arbitration logic to select the best output._
 
 ## Features
