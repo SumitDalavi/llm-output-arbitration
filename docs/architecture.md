@@ -1,25 +1,35 @@
-# llm-output-arbitration Architecture
+# Architecture — llm-output-arbitration
+> Last updated: 2026-08-29 | Maturity: Partial Prototype
+> _LLM consensus and arbitration engine._
 
 ## System Diagram
-The following Mermaid.js sequence diagram maps the core workflow and interactions within the system:
-
 ```mermaid
-sequenceDiagram
-    Client->>Arbiter: Prompt
-Arbiter->>ModelA: Prompt
-Arbiter->>ModelB: Prompt
-ModelA-->>Arbiter: Response A
-ModelB-->>Arbiter: Response B
-Arbiter->>JudgeLLM: Evaluate Responses
-JudgeLLM-->>Arbiter: Best Response
-Arbiter-->>Client: Final Answer
+flowchart TD
+    Client(["Client App"])
+    Arbitrator["Arbitration Engine"]
+    LLM1["GPT-4o (Mock)"]
+    LLM2["Claude 3.5 (Mock)"]
+    LLM3["Gemini 1.5 (Mock)"]
+    Evaluator["Cost/Quality Evaluator"]
+
+    Client -->|"Prompt"| Arbitrator
+    Arbitrator --> LLM1
+    Arbitrator --> LLM2
+    Arbitrator --> LLM3
+    LLM1 -.->|"Ans 1"| Evaluator
+    LLM2 -.->|"Ans 2"| Evaluator
+    LLM3 -.->|"Ans 3"| Evaluator
+    Evaluator -->|"Best Answer"| Client
 ```
 
-## Component Breakdown
-- **Core Technology**: Python, Asyncio
-- **Design Paradigm**: Emphasizes high availability, fault tolerance, and security boundaries.
+## Component Table
+| Component | File | Responsibility | Tech |
+|---|---|---|---|
+| Arbitrator | `src/arbitrator/`| Manages parallel LLM calls | Python Asyncio |
+| Evaluator | `src/evaluator/`| Scores answers on cost/speed/quality | Python |
+| API | `server/`| REST Interface | FastAPI |
 
-## Security & Scaling Considerations
-- Strict input validations and sanitization.
-- Horizontal scalability achieved via stateless workers and queues where applicable.
-- Encrypted data at rest and in transit.
+## Dependency Honesty Table
+| Dependency | Status | Notes |
+|---|---|---|
+| Providers | **Mocked** | Currently uses static test fixtures for LLM responses to avoid API costs during evaluation. |
