@@ -33,3 +33,8 @@ flowchart TD
 | Dependency | Status | Notes |
 |---|---|---|
 | Providers | **Mocked** | Currently uses static test fixtures for LLM responses to avoid API costs during evaluation. |
+
+
+## Component Breakdown
+- **Core Technology**: Python, LangGraph, Pydantic
+- **Design Paradigm**: Emphasizes high availability, fault tolerance, and security.
