@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-08-29T15:56:08.820740Z",
+  "metrics": {
+    "arbitration_latency_s": 0,
+    "status": 500,
+    "response": {
+      "error": "<urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>"
+    },
+    "success": false
+  }
+}

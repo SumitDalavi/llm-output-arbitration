@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-08-29T16:10:51.538069Z",
+  "metrics": {
+    "arbitration_latency_s": 0,
+    "status": 500,
+    "response": {
+      "error": "Remote end closed connection without response"
+    },
+    "success": false
+  }
+}
