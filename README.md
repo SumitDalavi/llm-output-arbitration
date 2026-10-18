@@ -1,6 +1,10 @@
 # llm-output-arbitration
 
 [![Release](https://img.shields.io/github/v/release/SumitDalavi/llm-output-arbitration?color=blue&logo=github)](https://github.com/SumitDalavi/llm-output-arbitration/releases)
+[![Release Workflow](https://github.com/SumitDalavi/llm-output-arbitration/actions/workflows/release.yml/badge.svg)](https://github.com/SumitDalavi/llm-output-arbitration/actions/workflows/release.yml)
+[![SBOM](https://img.shields.io/badge/SBOM-SPDX%20JSON-blueviolet?logo=spdx)](https://github.com/SumitDalavi/llm-output-arbitration/releases)
+
+[![Release](https://img.shields.io/github/v/release/SumitDalavi/llm-output-arbitration?color=blue&logo=github)](https://github.com/SumitDalavi/llm-output-arbitration/releases)
 [![SBOM](https://img.shields.io/badge/SBOM-SPDX%20JSON-blueviolet?logo=spdx)](https://github.com/SumitDalavi/llm-output-arbitration/releases)
 
 > **Maturity:** Functional Prototype
@@ -49,7 +53,7 @@ Please see the [Architecture Document](docs/architecture.md) for sequence diagra
 - [Decisions](docs/decisions.md) — ADRs for arbitration strategy
 - [Changelog](docs/changelog.md) — Change history
 
-## Release & Verification
+## Release & Security Verification
 
 The project includes an automated DevSecOps release pipeline (`.github/workflows/release.yml`) triggered on semantic version tags (`v*.*.*`).
 
@@ -69,3 +73,10 @@ gh release view v0.1.0 --repo SumitDalavi/llm-output-arbitration
 gh release download v0.1.0 --repo SumitDalavi/llm-output-arbitration --pattern "sbom.spdx.json"
 cat sbom.spdx.json | jq .
 ```
+
+## Documentation
+
+- [Architecture](docs/ARCHITECTURE.md)
+- [Runbook](docs/runbook.md)
+- [Decisions](docs/decisions.md)
+- [Changelog](docs/changelog.md)
