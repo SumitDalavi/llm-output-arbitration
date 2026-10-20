@@ -1,11 +1,13 @@
 # llm-output-arbitration
 
-[![Release](https://img.shields.io/github/v/release/SumitDalavi/llm-output-arbitration?color=blue&logo=github)](https://github.com/SumitDalavi/llm-output-arbitration/releases)
+[![CI Pipeline](https://github.com/SumitDalavi/llm-output-arbitration/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/SumitDalavi/llm-output-arbitration/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/SumitDalavi/llm-output-arbitration?color=0969da&label=release&logo=github)](https://github.com/SumitDalavi/llm-output-arbitration/releases)
 [![Release Workflow](https://github.com/SumitDalavi/llm-output-arbitration/actions/workflows/release.yml/badge.svg)](https://github.com/SumitDalavi/llm-output-arbitration/actions/workflows/release.yml)
-[![SBOM](https://img.shields.io/badge/SBOM-SPDX%20JSON-blueviolet?logo=spdx)](https://github.com/SumitDalavi/llm-output-arbitration/releases)
-
-[![Release](https://img.shields.io/github/v/release/SumitDalavi/llm-output-arbitration?color=blue&logo=github)](https://github.com/SumitDalavi/llm-output-arbitration/releases)
-[![SBOM](https://img.shields.io/badge/SBOM-SPDX%20JSON-blueviolet?logo=spdx)](https://github.com/SumitDalavi/llm-output-arbitration/releases)
+[![GHCR Container](https://img.shields.io/badge/ghcr.io-v0.2.0-blue?logo=docker&logoColor=white)](https://github.com/SumitDalavi/llm-output-arbitration/pkgs/container/llm-output-arbitration)
+[![Node.js](https://img.shields.io/badge/Node.js-20+-339933?logo=nodedotjs&logoColor=white)](https://nodejs.org)
+[![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)](https://www.python.org)
+[![SBOM](https://img.shields.io/badge/SBOM-SPDX%202.3-blueviolet?logo=spdx)](https://github.com/SumitDalavi/llm-output-arbitration/releases/tag/v0.2.0)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 > **Maturity:** Functional Prototype
 > _Consensus system that queries multiple LLMs simultaneously and uses arbitration logic to select the best output._
@@ -30,13 +32,11 @@ pytest
 ## Architecture
 Please see the [Architecture Document](docs/architecture.md) for sequence diagrams and system design details.
 
-
 ## CI & Reliability Updates (August 2026)
 
 - **CI Pipeline Remediation:** Successfully resolved all CI/CD pipeline failures and established baseline CI workflows.
 - **Specific Fix:** Added and configured robust GitHub Actions workflows for automated testing, linting, and formatting.
 - **Status:** 🟩 Passing
-
 
 ## Mock Boundaries (Honest Scope)
 
