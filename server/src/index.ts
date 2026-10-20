@@ -3,10 +3,23 @@ import express from 'express';
 import cors from 'cors';
 import { buildArbitrationGraph } from './orchestration/graph';
 import { initDb, saveArbitration, getArbitrations } from './db';
+import { credentialStatus } from './shared/credential-mode';
 
 export const app = express();
 app.use(cors());
 app.use(express.json());
+
+app.get('/health', (req, res) => {
+  res.json({
+    status: 'ok',
+    service: 'llm-output-arbitration',
+    timestamp: new Date().toISOString(),
+    mode: {
+      openai: credentialStatus.openai,
+      database: credentialStatus.database
+    }
+  });
+});
 
 app.post('/api/v1/arbitrate', async (req, res) => {
   try {

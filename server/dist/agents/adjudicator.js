@@ -7,6 +7,7 @@ async function runAdjudicator(state) {
     const model = new openai_1.ChatOpenAI({
         modelName: "gpt-4o", // Using full GPT-4o for the adjudicator as it needs higher reasoning
         temperature: 0.1,
+        apiKey: process.env.OPENAI_API_KEY || "sk-dummy",
     }).withStructuredOutput(schema_1.VerdictSchema);
     const prompt = `You are the Adjudicator Agent.
 You receive:

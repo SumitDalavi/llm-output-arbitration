@@ -1,10 +1,12 @@
 import { ChatOpenAI } from "@langchain/openai";
 import { CritiqueSchema, ArbitrationState } from "../../models/schema";
+import { isRealOpenAIKey } from "../../shared/credential-mode";
 
-// Helper function to create structured critics
+// Helper function to create structured critics with PCL support
 const getModel = () => new ChatOpenAI({
   modelName: "gpt-4o-mini",
   temperature: 0.1,
+  apiKey: process.env.OPENAI_API_KEY || "sk-dummy",
 }).withStructuredOutput(CritiqueSchema);
 
 const accuracyPrompt = `You are the Factual Accuracy Critic.

@@ -3,10 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.runCompletenessCritic = exports.runLogicCritic = exports.runAccuracyCritic = void 0;
 const openai_1 = require("@langchain/openai");
 const schema_1 = require("../../models/schema");
-// Helper function to create structured critics
+// Helper function to create structured critics with PCL support
 const getModel = () => new openai_1.ChatOpenAI({
     modelName: "gpt-4o-mini",
     temperature: 0.1,
+    apiKey: process.env.OPENAI_API_KEY || "sk-dummy",
 }).withStructuredOutput(schema_1.CritiqueSchema);
 const accuracyPrompt = `You are the Factual Accuracy Critic.
 Check whether claims in the provided output are verifiable and internally consistent.

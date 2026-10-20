@@ -10,6 +10,7 @@ export async function detectDisagreements(state: ArbitrationState) {
   const model = new ChatOpenAI({
     modelName: "gpt-4o-mini",
     temperature: 0.1,
+    apiKey: process.env.OPENAI_API_KEY || "sk-dummy",
   }).withStructuredOutput(DisagreementSchema);
 
   const prompt = `You are the Disagreement Detector.

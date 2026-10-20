@@ -9,9 +9,21 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const graph_1 = require("./orchestration/graph");
 const db_1 = require("./db");
+const credential_mode_1 = require("./shared/credential-mode");
 exports.app = (0, express_1.default)();
 exports.app.use((0, cors_1.default)());
 exports.app.use(express_1.default.json());
+exports.app.get('/health', (req, res) => {
+    res.json({
+        status: 'ok',
+        service: 'llm-output-arbitration',
+        timestamp: new Date().toISOString(),
+        mode: {
+            openai: credential_mode_1.credentialStatus.openai,
+            database: credential_mode_1.credentialStatus.database
+        }
+    });
+});
 exports.app.post('/api/v1/arbitrate', async (req, res) => {
     try {
         const { originalPrompt, originalOutput } = req.body;
