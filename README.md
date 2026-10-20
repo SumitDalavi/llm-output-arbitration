@@ -1,4 +1,4 @@
-# llm-output-arbitration
+# LLM Output Arbitration ⚖️🤖
 
 [![CI Pipeline](https://github.com/SumitDalavi/llm-output-arbitration/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/SumitDalavi/llm-output-arbitration/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/SumitDalavi/llm-output-arbitration?color=0969da&label=release&logo=github)](https://github.com/SumitDalavi/llm-output-arbitration/releases)
@@ -30,13 +30,7 @@ pytest
 ```
 
 ## Architecture
-Please see the [Architecture Document](docs/architecture.md) for sequence diagrams and system design details.
-
-## CI & Reliability Updates (August 2026)
-
-- **CI Pipeline Remediation:** Successfully resolved all CI/CD pipeline failures and established baseline CI workflows.
-- **Specific Fix:** Added and configured robust GitHub Actions workflows for automated testing, linting, and formatting.
-- **Status:** 🟩 Passing
+Please see the [Architecture Document](docs/ARCHITECTURE.md) for sequence diagrams and system design details.
 
 ## Mock Boundaries (Honest Scope)
 
@@ -77,7 +71,7 @@ Enterprise deployment with production-grade backends, security scans, and contai
 - [Decisions](docs/decisions.md) — ADRs for arbitration strategy
 - [Changelog](docs/changelog.md) — Change history
 
-## Release & Security Verification
+## 🔒 Release & Security Verification
 
 The project includes an automated DevSecOps release pipeline (`.github/workflows/release.yml`) triggered on semantic version tags (`v*.*.*`).
 
@@ -91,16 +85,17 @@ Each release automatically:
 ### Verifying the Release
 ```bash
 # Verify release via GitHub CLI
-gh release view v0.1.0 --repo SumitDalavi/llm-output-arbitration
+gh release view v0.2.0 --repo SumitDalavi/llm-output-arbitration
 
 # Download and inspect SBOM
-gh release download v0.1.0 --repo SumitDalavi/llm-output-arbitration --pattern "sbom.spdx.json"
+gh release download v0.2.0 --repo SumitDalavi/llm-output-arbitration --pattern "sbom.spdx.json"
 cat sbom.spdx.json | jq .
 ```
 
-## Documentation
+## 👨‍💻 Author
 
-- [Architecture](docs/ARCHITECTURE.md)
-- [Runbook](docs/runbook.md)
-- [Decisions](docs/decisions.md)
-- [Changelog](docs/changelog.md)
+**Sumit Dalavi** — Senior DevSecOps / Platform Engineer
+[GitHub](https://github.com/SumitDalavi) | [LinkedIn](https://in.linkedin.com/in/sumit-dalavi-762838129)
+
+---
+*Built with a focus on robust patterns, not toy demos.*
