@@ -9,8 +9,7 @@
 [![SBOM](https://img.shields.io/badge/SBOM-SPDX%202.3-blueviolet?logo=spdx)](https://github.com/SumitDalavi/llm-output-arbitration/releases/tag/v0.2.0)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-> **Maturity:** Functional Prototype
-> _Consensus system that queries multiple LLMs simultaneously and uses arbitration logic to select the best output._
+> Consensus engine that queries multiple LLMs simultaneously and uses arbitration logic to select the highest-fidelity output.
 
 ## Features
 - Fully automated workflow.
